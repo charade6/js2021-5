@@ -69,11 +69,12 @@ ex)
 ```jsx
 let test; //변수선언
 test = test || "초기화!"
-console.log(test); // 변수test가 undefined이므로 초기화! 출력
+console.log(test);
+'초기화!' // 변수test가 undefined이므로 초기화! 출력
 ```
 ### 반복문
 #### 배열
->let 이름 = [자료, 자료, 자료, 자료, 자료]
+>let 이름 = [자료, 자료, 자료, 자료, 자료]<br>
 여러 자료형이 섞여있을 수 있음
 
 #### while 반복문
@@ -109,6 +110,8 @@ for (let 요소 in 배열) {
 ```
 index번호(i값)이 필요할때 for in 사용
 index번호 필요없을때 for of 사용
+<hr>
+
 ## [03월23일]
 ### 문자열
 * 이스케이프 문자
