@@ -1,4 +1,78 @@
 # 장지원 [201640133]
+## [04월 27일]
+### 표준 내장함수
+* clearInterval - setInterval 사용하였을때 사용하여 횟수제한
+```jsx
+let foo = setInterval(()=>{
+    console.log("인터벌 1초경과");
+}, 1000)
+
+setTimeout(()=>{
+    clearInterval(foo);
+}, 3000)    // 3초후 종료
+```
+### 익명함수와 화살표함수의 차이
+함수 내부에서 가지는 this
+* 익명함수 - 전역적으로 사용
+* 화살표함수 - 지역적으로 사용
+## 객체
+### 기본
+```jsx
+//객체선언
+let foo = {
+    제품명: "건조 망고",
+    유형: "당절임",
+    원산지: "필리핀",
+    price: 1200
+};
+
+console.log(foo.price);
+```
+키는 영어로 적는게 좋음
+### 반복문
+생성한 객체에 for in 반복문 사용가능
+```jsx
+let foo = {
+    제품명: "건조 망고",
+    유형: "당절임",
+    원산지: "필리핀",
+    price: 1200
+};
+
+for (let key in foo){
+    console.log(`${key}: ${foo[key]}`);
+}
+```
+### 메소드
+메소드: 객체의 속성중 자료형이 함수인 속성
+```jsx
+let foo = {
+    제품명: "건조 망고",
+    price: 1200,
+    print: function(){
+        console.log(`${this.name} - ${this.price}`);
+    }
+};
+
+foo.print();
+```
+**※ 자바스크립트에서는 this 키워드를 사용하지않으면 오류발생 </br>
+※ 화살표 함수를 사용하여 메소드를만들면 'undefined'출력됨**
+### 생성자 함수
+생성자함수 : 객체를 만드는 함수 대문자로 시작
+```jsx
+function Product(foo, bar){
+	this.foo1 = foo;
+	this.ber1 = bar;
+}
+
+let product = new Product("바나나:,1200");  // new 키워드로 객체 생성
+
+console.log(product);
+```
+
+<hr>
+
 ## [04월 13일]
 ### 함수
 #### 익명함수
@@ -44,7 +118,13 @@ function (매개변수,매개변수){
 ```
 ### 콜백함수
 함수의 매개변수로 전달되는 함수<br>
-code5-14
+```jsx
+function tenTimes(foo){
+    for(let i=0; i<10; i++){
+        foo();
+    }
+}
+```
 ### 표준 내장함수
 자바스크립트에서 기본적으로 지원하는 함수
 * 숫자 변환 함수 <br>
@@ -54,7 +134,8 @@ code5-14
 | parseInt()    |  문자열을 정수로 변환  |
 | parseFloat    |  문자열을 실수로 변환  |
 <br>
-* 타이머 함수<br>
+
+* 타이머 함수   code5-16<br>
 
 | 함수                   | 설명                       |
 | :-------------------- | -------------------------: |
