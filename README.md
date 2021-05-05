@@ -1,4 +1,98 @@
 # 장지원 [201640133]
+## [05월 04일]
+### 프로토타입
+모든 함수가 가지고 있는 속성으로 해당 함수를 생성자 함수로 사용했을 때만 의미가 있음
+```jsx
+function Product(name, price){
+    this.name = name;
+    this.price = price;
+}
+
+Product.prototype.print = function () {     // 프로토타입에 메소드를 선언
+    console.log(`${this.name}의 가격은 ${this.price}원입니다.`);    
+}
+
+let product = new Product("바나나", 1200);  // 객체를 생성
+
+console.log(product);
+product.print();        // 메소드 호출
+```
+#### null값과 자료형
+* null은 null값을 가진 객체(object)임
+* 자바스크립트에서 아예 존재하지 않는다고 인식하는값은 undefined와 null뿐임
+## 7.표준내장객체
+### 기본 자료형과 객체 자료형의 차이
+기본 자료형: 숫자, 문자열, 불
+```jsx
+let foo = false;
+let bar = 123;
+
+console.log(typeof foo);    //boolean
+console.log(typeof bar);    //number
+```
+객체 숫자, 문자열, 불
+```jsx
+let number = new Number(273);
+let string = new String("안녕");
+
+console.log(typeof number); //object
+console.log(typeof string); //object
+```
+기본 자료형은 객체가 아니므로 속성과 메소드를 추가할 수 없음</br>
+→ 프로토타입으로 바꾸면 가능
+```jsx
+let foo = 273;
+
+Number.prototype.method = function () {     //메소드 추가
+    return "hello"
+}
+console.log(foo.method());
+```
+### Number 객체
+Number객체는 숫자를 표현할때 사용
+
+| 메소드            | 설명                                                                 |
+| :--------------- | -------------------------------------------------------------------: |
+| toExponential()  |  숫자를 지수 표시로 나타낸 문자열을 리턴                                 |
+| toFixed()        |  숫자를 고정소수점 표시로 나타낸 문자열을 리턴                           |
+| toPrecision()    |  숫자를 길이에 따라 지수 표시 또는 고정소수점 표시로 나타낸 문자열을 리턴  |
+
+생성자함수에 속성과 메소드 추가
+```jsx
+function Constructor() { }      // 생성자 함수 생성
+Constructor.foo = 273;
+Constructor.bar = function () {};
+
+console.log(Constructor.foo);       //생성자함수의 속성
+console.log(Constructor.bar);       //생성자함수의 메서드 출력
+```
+Number 생성자 함수의 속성
+| 속성                | 설명                                  |
+| :------------------ | -----------------------------------: |
+| MAX_VALUE           |  자바스크립트가 나타낼수있는 최대숫자   |
+| MIN_VALUE           |  자바스크립트가 나타낼수있는 최소숫자   |
+| NaN                 |  자바스크립트로 나타낼수없는 숫자       |
+| POSITIVE_INFINITY   |  양의 무한대 숫자                     |
+| NEGATIVE_INFINITY   |  음의 무한대 숫자                     |
+### String 객체
+```jsx
+let foo = "abcdefg";
+let bar = foo.toUpperCase();
+console.log(foo);       // abcdefg
+console.log(bar);       // ABCDEFG
+```
+**String 객체의 메소드들은 원본데이터를 변형시키지않는다</br> 변형된데이터를 리턴시켜줌**
+```jsx
+let foo ="좋은 아침입니다.";
+
+if(foo.indexOf('아침') >= 0){
+	console.log("굿모닝");
+}else{
+	console.log("굿나잇");
+}
+```
+<hr>
+
 ## [04월 27일]
 ### 표준 내장함수
 * clearInterval - setInterval 사용하였을때 사용하여 횟수제한
@@ -15,7 +109,7 @@ setTimeout(()=>{
 함수 내부에서 가지는 this
 * 익명함수 - 전역적으로 사용
 * 화살표함수 - 지역적으로 사용
-## 객체
+## 6.객체
 ### 기본
 ```jsx
 //객체선언
@@ -74,20 +168,20 @@ console.log(product);
 <hr>
 
 ## [04월 13일]
-### 함수
-#### 익명함수
+## 5.함수
+### 익명함수
 ```jsx
 function 함수이름(){
 
 }
 ```
-#### 선언적함수
+### 선언적함수
 ```jsx
 let 변수이름 = function 함수이름(){
 
 }
 ```
-#### 화살표함수
+### 화살표함수
 ```jsx
 let 변수이름 = () => {
 
@@ -325,12 +419,12 @@ test = test || "초기화!"
 console.log(test);
 '초기화!' // 변수test가 undefined이므로 초기화! 출력
 ```
-### 반복문
-#### 배열
+## 4.반복문
+### 배열
 >let 이름 = [자료, 자료, 자료, 자료, 자료]<br>
 여러 자료형이 섞여있을 수 있음
 
-#### while 반복문
+### while 반복문
 ```jsx
 while(조건식) {
     조건식이 참인 동안 실행문장;
@@ -342,7 +436,7 @@ while(true) {
     console.log("무한반복");
 }
 ```
-#### for 반복문
+### for 반복문
 ```jsx
 for(let i=0; i<반복횟수; i++) {
     문장;
@@ -450,15 +544,15 @@ ex)`console.log(!!0);`
 * 상수 : 항상 같은수
 상수선언
 >const 상수이름 = 상수값;
-### 조건문
-#### if 조건문
+## 3.조건문
+### if 조건문
 ```
 if (조건식){
 
 }
 ```
 조건식이 true일때 문장실행
-#### if else 조건문
+### if else 조건문
  ```jsx
  if (조건식){
      // 조건식이 참일 때
