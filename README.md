@@ -20,7 +20,7 @@ console.log(interval+"일이 지났다");    // 153일이 지났다 출력
 ```
 ### Array 객체
 #### 기본 메소드
-사용법은 [4월 13일] 배열함수 참조
+사용법은 [4월 13일] 배열함수 [참조](https://github.com/charade6/js2021-5#%EB%B0%B0%EC%97%B4-%ED%95%A8%EC%88%98)
 1. push : 배열의 끝에 원하는 값을 추가하는 함수
 
 2. pop : 배열의 마지막 주소에 있는 값을 제거해주는 함수
@@ -93,7 +93,7 @@ console.log(foobar);
 ```
 ### underscore.js 사용하기
 
-[underscore]: https://underscorejs.org/ "underscorejs.org"
+[underscorejs.org](https://underscorejs.org/)
 ### JSON 객체
 - 문자열은 큰따옴표로 만듬
 - 모든 키는 큰따옴표로 감싸야함
