@@ -7,7 +7,7 @@
 * 9주차 [04월27일 - 함수, 객체](https://github.com/charade6/js2021-5#04%EC%9B%94-27%EC%9D%BC)</br>
 * 10주차 [05월04일 - 표준 내장 객체](https://github.com/charade6/js2021-5#05%EC%9B%94-04%EC%9D%BC)</br>
 * 11주차 [05월11일 - 표준 내장 객체, 예외처리](https://github.com/charade6/js2021-5#05%EC%9B%94-11%EC%9D%BC)</br>
-* 12주차 [05월18일 - Node.js]()
+* 12주차 [05월18일 - Node.js](https://github.com/charade6/js2021-5#05%EC%9B%94-18%EC%9D%BC)</br>
 
 ## [05월 18일]
 ## 9. Node.js 기본
