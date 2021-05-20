@@ -1,4 +1,191 @@
 # 장지원 [201640133]
+* 3주차 [03월16일 - js기초](https://github.com/charade6/js2021-5#03%EC%9B%9416%EC%9D%BC)</br>
+* 4주차 [03월23일 - 자료형, 변수, 연산자, 상수, 조건문](https://github.com/charade6/js2021-5#03%EC%9B%9423%EC%9D%BC)</br>
+* 5주차 [03월30일 - 조건문, 반복문](https://github.com/charade6/js2021-5#03%EC%9B%9430%EC%9D%BC)</br>
+* 6주차 [04월06일 - 반복문, 배열함수](https://github.com/charade6/js2021-5#04%EC%9B%94-06%EC%9D%BC)</br>
+* 7주차 [04월13일 - 함수](https://github.com/charade6/js2021-5#04%EC%9B%94-13%EC%9D%BC)</br>
+* 9주차 [04월27일 - 함수, 객체](https://github.com/charade6/js2021-5#04%EC%9B%94-27%EC%9D%BC)</br>
+* 10주차 [05월04일 - 표준 내장 객체](https://github.com/charade6/js2021-5#05%EC%9B%94-04%EC%9D%BC)</br>
+* 11주차 [05월11일 - 표준 내장 객체, 예외처리](https://github.com/charade6/js2021-5#05%EC%9B%94-11%EC%9D%BC)</br>
+* 12주차 [05월18일 - Node.js]()
+
+## [05월 18일]
+## 9. Node.js 기본
+### 전역변수
+* 문자열 자료형의 전역변수
+```jsx
+console.log(__filename);    // 현재 실행중인 파일경로 나타냄
+console.log(__dirname);     // 현재 실행중인 폴더경로 나타냄
+```
+### process 객체의 속성
+| 속성       | 설명                                    |
+| :--------- | -------------------------------------: |
+| env        |  컴퓨터 환경 정보 나타냄                 |
+| version    |  Node.js 버전을 나타냄                  |
+| versions   |  Node.js와 종속된 프로그램버전을 나타냄  |
+| arch       |  프로세서 아키텍쳐를 나타냄              |
+| platform   |  플랫폼을 나타냄                        |
+
+### process 객체의 메소드
+| 메소드                 | 설명                                   |
+| :-------------------- | -------------------------------------: |
+| exit([exitCode = 0])  |  프로그램을 종료합니다                   |
+| memoryUsage()         |  메모리 사용 정보 객체를 리턴합니다       |
+| uptime()              |  현재 프로그램이 실행된 시간을 리턴합니다  |
+
+### 이벤트 연결 메서드
+on(<이벤트이름>,<이벤트 핸들러>)
+이벤트이름
+exit
+uncaughtException
+```jsx
+dasd
+```
+### os 모듈
+```jsx
+const foo = require('os'); // 모듈 추출
+
+console.log(foo.hostname());  // 운영체제 호스트 이름 리턴 
+console.log(foo.totalame());  // 시스템 총 메모리 리턴 
+```
+### url 모듈
+```jsx
+const foo = requrire('url');    // 모듈 추출
+
+console.log(foo.parse("https://naver.com")); // url문자열을 객체로 변환 후 리턴 
+```
+### File System 모듈
+#### 파일 읽기
+동기식
+* 파일크기가 크다면 파일을 읽고난후 코드가 정지할 가능성 있음
+* 문제 해결위해 쓰레드 기능을 사용해야함
+```jsx
+const fs = require('fs');      // 모듈 추출
+const fs = readFileSync("text.txt");   // 파일을 읽음
+
+console.log(file);             // 파일 내용을 16진수로 출력 
+console.log(file.toString());  // 파일 내용을 문자로 출력 
+
+// 이렇게도 사용가능
+console.log(fs.readFileSync('test.txt').toString());
+```
+비동기식
+* 코드는 진행하고 Node.js의 뒷단에서 파일을 읽어 들이는 처리수행
+* 뒷단에서 처리가 모두 끝나면, 그때 콜백함수부분 실행
+* 콜백함수의 첫 번째 매개변수는 오류객체이고 두번째 매개변수가 원하는값임
+```jsx
+const fs = require('fs');      // 모듈 추출
+
+const fs = readFile("text.txt", (error, file) => {      // 파일을 읽음
+    console.log(file);             // 파일 내용 출력 
+    console.log(file.toString());  
+});   
+```
+#### 파일 쓰기
+동기식
+```jsx
+const fs = require("fs");   // 모듈 추출
+
+fs.writeFileSync("text.txt", "안녕하세요");     // 파일 쓰기
+```
+비동기식
+```jsx
+const fs = require('fs');   // 모듈 추출
+
+fs.writeFile('output.txt','안녕하세요',(error) =>{  // 파일 쓰기
+console.log("파일 쓰기 완료");
+});
+```
+#### 파일 예외처리
+동기식
+```jsx
+const fs = require('fs');   // 모듈 추출
+
+try{                        // 예외처리
+const file1 =fs.readFileSync('none.txt');   //파일을 읽고 출력
+console.log(file);
+console.log(file.toString());
+}catch(exception){          // 예외 발생시
+    console.log("파일을 읽어 들이는데 문제가 발생했습니다");         // 출력
+}
+```
+비동기식
+```jsx
+const fs = require('fs');       // 모듈 추출
+fs.readFile('none.txt',(error,file)=>{      //파일을 읽고 출력
+    if(error){              // 예외 발생시
+        console.log("파일을 읽어 들이는데 문제가 발생했습니다");       // 출력
+    }else{
+    console.log(file);
+    console.log(file.toString());
+    }
+})
+```
+### request 모듈
+웹 요청을 쉽게 만들어주는 모듈
+```jsx
+npm install request     // 외부모듈이므로 npm으로 설치해야 사용가능
+```
+```jsx
+const request = require('request');     // 모듈 추출
+
+request("https://naver.com",(error,response, body)=>{   // request 모듈 사용
+    console.log(body);
+})
+```
+### cheerio 모듈
+웹 페이지의 특정 위치에서 데이터추출하는 모듈
+```jsx
+npm install cheerio     // 외부모듈이므로 npm으로 설치해야 사용가능
+```
+```jsx
+const request1 = require('request');        // 모듈 추출
+const cheerio = require('cheerio');
+request1("https://naver.com",(error,response, body)=>{
+    const $ = cheerio.load(body);
+    console.log($("strong.new").text());        // strong.new 데이터 추출후 출력
+})
+```
+### async 모듈
+```jsx
+npm install async     // 외부모듈이므로 npm으로 설치해야 사용가능
+```
+복잡한 비동기코드
+```jsx
+const fs = require('fs');   // 모듈 추출
+
+fs.readFile('fileA.txt', (error, fileA) => {
+    fs.readFile('fileB.txt', (error, fileB) =>  {
+        fs.readFile('fileC.txt', (error, fileC) => {
+            console.log(fileA);
+            console.log(fileB);
+            console.log(fileC);
+        });
+    });
+})
+```
+parallel() 메소드 사용
+```jsx
+const fs = require('fs');   // 모듈 추출
+const async = require('async');
+
+async.parallel({
+    fileA: (callback) => {
+        fs.readFile('fileA.txt', callback);
+    },
+    fileB: (callback) => {
+        fs.readFile('fileB.txt', callback);
+    },
+    fileC: (callback) => {
+        fs.readFile('fileC.txt', callback);
+    }
+}, (error, results) => {
+    console.log(results.fileA);
+    console.log(results.fileB);
+    console.log(results.fileC);
+})
+```
+***
 ## [05월 11일]
 ### Date 객체
 | 생성자함수               | 설명                                                                 |
@@ -228,7 +415,7 @@ if(foo.indexOf('아침') >= 0){
 	console.log("굿나잇");
 }
 ```
-<hr>
+***
 
 ## [04월 27일]
 ### 표준 내장함수
