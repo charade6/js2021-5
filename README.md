@@ -8,6 +8,215 @@
 * 10주차 [05월04일 - 표준 내장 객체](https://github.com/charade6/js2021-5#05%EC%9B%94-04%EC%9D%BC)</br>
 * 11주차 [05월11일 - 표준 내장 객체, 예외처리](https://github.com/charade6/js2021-5#05%EC%9B%94-11%EC%9D%BC)</br>
 * 12주차 [05월18일 - Node.js](https://github.com/charade6/js2021-5#05%EC%9B%94-18%EC%9D%BC)</br>
+* 13주차 [05월25일 - express 모듈]()</br>
+
+## [05월 25일]
+## 10. express 모듈
+```jsx
+npm install express     // 외부모듈이므로 npm으로 설치해야 사용가능
+```
+### 기본 메소드
+| 메소드            | 설명                                   |
+| :---------------- | -------------------------------------: |
+| express()         |  서버 애플리케이션 객체를 생성          |
+| app.use()         |  요청이 왔을때 실행할 함수를 지정       |
+| app.listen()      |  서버를 실행                          |
+
+```jsx
+const express = require('express');     // 모듈의 객체 생성
+
+const app = express();                  // 서버 생성
+
+app.use((request, response) => {        // request 이벤트 리스너 설정
+    response.send('<h1>Hello express</h1>');
+});
+
+app.listen(52273, () => {               // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+// 1024 ~ 49151 등록된포트
+// 49152 ~ 65535 동적 포트
+```
+### 페이지 라우팅
+페이지 라우팅 - 클라이언트 요청에 적절한 페이지를 제공하는 기술</br>
+</br>
+페이지 라우팅을 할 때 토큰을 활용</br>
+
+* ':<토큰 이름>' 형태로 설정</br>
+```jsx
+const express = require('express');     // 모듈의 객체 생성
+
+const app = express();                  // 서버 생성
+
+app.get('/page/:id',(request, response) => {    // request 이벤트 리스너 설정
+    const id = request.params.id;               // 토큰 꺼내기
+    response.send(`<h1>${id} Page</h1>`);       // 응답하기
+});
+
+app.listen(52273, () => {                       // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+### 요청과 응답
+#### response 객체
+```jsx
+const express = require('express');     // 모듈의 객체 생성
+
+const app = express();                  // 서버 생성
+
+app.get('*',(request, response) => {    // request 이벤트 리스너 설정
+    response.status(404);
+    response.set('methodA', 'ABCD');
+    response.set({
+        methodB1: 'FGHIJ',
+        methodB2: 'KLMNO',
+    });
+    response.send('본문을 입력합니다.');
+});
+
+app.listen(52273, () => {                       // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### Content-Type
+```jsx
+const express = require('express');                 // 모듈의 객체 생성
+const fs = require('fs');
+
+const app = express();                              // 서버 생성
+
+app.get('/image', (request, response) => {          // request 이벤트 리스너 설정
+    fs.readFile('image.png', (error, data) => {
+        response.type('image/png');                 // 이미지 파일 제공
+        response.send(data);
+    });
+});
+
+app.get('/audio', (request, response) => {          
+    fs.readFile('audio.mp3', (error, data) => {
+        response.type('image/png');                 // 오디오 파일 제공
+        response.send(data);
+    })
+})
+
+app.listen(52273, () => {                           // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+HTTP 상태 코드
+| 메소드   |설명            | 예                                |
+| :------- |---------------|---------------------------------: |
+| 1XX      | 처리중         |100 Continue                       |
+| 2XX      | 성공           |200 OK                             |
+| 3XX      | 리다이렉트      | 300 Multiple Choices             |
+| 4XX      | 클라이언트 오류 | 400 Bad Requset                   |
+| 5XX      | 서버오류       | 500 Internal Server Error         |
+
+#### request 객체
+
+```jsx
+const express = require('express');     // 모듈의 객체 생성
+
+const app = express();                  // 서버 생성
+
+app.get('*',(request, response) => {    // request 이벤트 리스너 설정
+    console.log(request.query);
+    response.send(request.query);
+});
+
+app.listen(52273, () => {                       // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+### 미들웨어 
+
+* 정적파일 제공 미들웨어
+
+```jsx
+const express = require('express');         // 모듈의 객체 생성
+
+const app = express();                      // 서버 설정
+app.use(express.static('public'));
+
+app.get('*', (request, response) => {       // request 이벤트 리스너 설정
+    response.status(404);
+    response.send('파일이 없습니다.');
+});
+
+app.listen(52273, () => {                   // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+* morgan 미들웨어
+```jsx
+npm install morgan     // 외부모듈이므로 npm으로 설치해야 사용가능
+```
+```jsx
+const express = require('express');         // 모듈의 객체 생성
+const morgan = require('morgan');
+
+const app = express();                      // 서버 생성
+app.use(express.static('public'));
+app.use(morgan('combined'));
+
+app.get('*', (request, response) => {       // request 이벤트 리스너 설정
+    response.send('명령 프롬프트를 확인해주세요.');
+});
+
+app.listen(52273, () => {                   // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+* body-parser 미들웨어 - 요청 본문을 분석
+```jsx
+const express = require('express');                 // 모듈의 객체 생성
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+
+const app = express();                              // 서버 생성
+app.use(express.static('public'));
+app.use(morgan('combined'));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get('/', (request, response) => {               // 이벤트 리스너 설정
+    let output = '';                                // HTML 형식의 문자열 생성
+    output += '<form method="post">';
+    output += ' <input type="text" name="a" />';
+    output += ' <input type="text" name="b" />';
+    output += '<input type="submit" />';
+    output += '</form>';
+
+    response.send(output);                          // 응답
+});
+
+app.post('/', (request,response) => {
+    response.send(request.body);
+})
+
+app.listen(52273, () => {                           // 서버 실행
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+## 11. RESTful 웹서비스
+* REST(**RE**presentational **S**tate **T**ransfer) 규정에 맞게 만든 ROA(**R**esource **O**riented **A**rchitecture)를 따르는 웹서비스 디자인 표준
+
+| 메소드  |컬렉션            | 요소                             |
+| :------ |---------------|---------------------------------: |
+|         | /collection               |/collection/id         |
+| GET     | 컬렉션을 조회              |컬렉션의 특정요소 조회   |
+| POST    | 컬렉션에 새로운 데이터 추가 | 사용하지 않습니다       |
+| PUT     | 컬렉션 전체를 한꺼번에 변경 | 컬렉션에 특정요소 수정  |
+| DELETE  | 컬렉션 전체를 삭제          | 컬렉션의 특정요소 삭제  |
+
+>ex) 사용자 관련 정보<br>
+GET /user : 사용자 전체조회<br>
+GET /user/273 : 273번 사용자 조회<br>
+POST /user : 사용자를 추가<br>
+DELETE /user/273 : 273번 사용자 삭제<br>
+***
 
 ## [05월 18일]
 ## 9. Node.js 기본
