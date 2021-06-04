@@ -9,7 +9,147 @@
 * 11주차 [05월11일 - 표준 내장 객체, 예외처리](https://github.com/charade6/js2021-5#05%EC%9B%94-11%EC%9D%BC)</br>
 * 12주차 [05월18일 - Node.js](https://github.com/charade6/js2021-5#05%EC%9B%94-18%EC%9D%BC)</br>
 * 13주차 [05월25일 - express 모듈](https://github.com/charade6/js2021-5#10-express-%EB%AA%A8%EB%93%88)</br>
+* 14주차 [06월01일 - 웹브라우저의 자바스크립트, jQuery]()</br>
 
+## [06월 01일]
+## 12. 웹브라우저의 자바스크립트
+### 구 버전 웹브라우저에서 사용할수 없는 코드
+* let키워드 , const키워드
+* 템플릿 문자열
+* 화살표 함수
+* for of 반복문
+* 사용할 수 없는 메소드
+
+### 브라우저 객체 모델
+![브라우저 객체 모델](https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile6.uf.tistory.com%2Fimage%2F014A1C41516E459F33A82D)
+
+### window 객체
+>alert(<메시지>) - 경고창 출력</br>
+prompt(<메시지>, <임시글자>) - 프롬프트 출력
+### screen 객체
+### location 객체, history 객체
+### navigator 객체
+## 14. jQuery
+### 사용준비
+[jQuery 공식사이트](http://jquery.com)
+1. 파일 다운로드하여 사용
+2. CDN활용</br>
+CDN(Content Delivery Network) - 사용자에게 간편하게 콘텐츠를 제공하는방식
+3. npm install jquery
+### jQuery 객체
+$(<매개 변수>).메소드(<매개변수>,<매개변수>)
+
+### 문서객체 선택
+```jsx
+<script>
+$(document).ready(funtion(){
+	let $headers = $('h1');
+for(let i = 0; i < $headers.length; i++){
+if( i % 2 == 1 ) {  
+		let domElement = $headers.get(i); 
+		$(domElement).css('backgroundColor', 'red');
+	}
+}
+</script>
+```
+### 문서객체 개별 조작
+```jsx
+$('h1').each(function (index, element){
+$(this).css('backgroundColor',red);
+$('h1:even').css('backgroundColor',red);    // 짝수
+$('h1:odd').css('backgroundColor',red);     // 홀수
+});
+```
+### 문서객체 문자 조작
+```jsx
+$('h1').text() // h1 태그 내부의 문자를 가져옴
+$('h1').html() // h1 태그 내부의 문자를 가져옴
+
+$('text-1').text('<h1>text 메서드</h1>');       // <h1>text() 메소드</h1> 출력
+$('text-2').html('<h1>html 메서드 </h1>');      // text() 메소드 출력
+```
+### 문서객체 스타일 조작
+```jsx
+//h1 태그의 color 스타일 속성을 가져옴
+$('h1').css('color')
+//h1 태그의 color 스타일 속성을 red로 설정
+$('h1').css('color','red')
+//h1 태그의 color 스타일 속성과 backgroundColor 스타일 속성을 설정
+$('h1').css({
+    color: 'red',
+    backgroundColor: 'orange'
+})
+```
+### 문서객체 속성 조작
+attr()사용
+```jsx
+//이미지 태그의 src 속성을 가져옴
+$('img').attr('src')
+
+// img 태그의 src 속성을 http://placehold.it/100x100으로 설정
+$('img').css('src','http://placehold.it/100x100')
+
+//img 태그의 src 속성과 alt 속성을 한꺼번에 지정한다
+$('img').css({
+    src: 'http://placehold.it/100x100',
+    alt: 'placehold.it'
+})
+```
+### 문서 객체 생성
+$('<HTML형식 문자열>')
+```jsx
+$('<h1></h1>').text('안녕하세요').attr('data-test','test').css({backgroundColor:'red',color:'white'}).appendTo('body');
+```
+### 이벤트 직접 연결
+$('요소').on('이벤트이름',콜백함수 (event)){
+}
+```jsx
+// h1태그에 클릭 이벤트 연결
+$('h1').on('click', function (event){
+    // 이벤트 발생시킨 문서객체 문자추출
+    let text = $(this).text();
+    // 출력
+    alert(text)
+})
+```
+### 이벤트 간접 연결
+```jsx
+// body 태그에 h1태그의 click 이벤트를 위임
+$('body').on('click', 'h1', function (event) {
+    // h1 태그를 생성해서 body 태그에 추가
+    $('<h1></h1>').text($(this).text()).appendTo('body');
+});
+```
+### 이벤트 제거
+```jsx
+let handler = function (event) {
+    // h1 태그를 생성해서 body 태그에 추가
+    $('<h1></h1>').text($(this).text()).appendTo('body');
+    // 현재 태그의 이벤트를 제거
+    $(this).off();
+};
+$('h1').on('click', handler); // 한번만 실행
+```
+### 애니메이션
+```jsx
+<style>
+width:100px;
+height:100px;
+background-color: red;
+position:absolute;
+left:10px;
+top:10px;
+</style>
+<script>
+$('.box').click(function () {
+    $(this).animate({
+        left:1000,
+    }, 1000
+    );
+});
+</script>
+```
+***
 ## [05월 25일]
 ## 10. express 모듈
 ```jsx
