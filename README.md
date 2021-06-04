@@ -9,7 +9,7 @@
 * 11주차 [05월11일 - 표준 내장 객체, 예외처리](https://github.com/charade6/js2021-5#05%EC%9B%94-11%EC%9D%BC)</br>
 * 12주차 [05월18일 - Node.js](https://github.com/charade6/js2021-5#05%EC%9B%94-18%EC%9D%BC)</br>
 * 13주차 [05월25일 - express 모듈](https://github.com/charade6/js2021-5#10-express-%EB%AA%A8%EB%93%88)</br>
-* 14주차 [06월01일 - 웹브라우저의 자바스크립트, jQuery]()</br>
+* 14주차 [06월01일 - 웹브라우저의 자바스크립트, jQuery](https://github.com/charade6/js2021-5#06%EC%9B%94-01%EC%9D%BC)</br>
 
 ## [06월 01일]
 ## 12. 웹브라우저의 자바스크립트
